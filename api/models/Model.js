@@ -5,29 +5,38 @@
  *   Abstract representation of a Waterline Model.
  */
 module.exports = {
-  description: 'Represents a Waterline collection that a User can create, query, etc.',
+    description: 'Represents a Waterline collection that a User can create, query, etc.',
 
-  autoPK: true,
-  autoCreatedBy: false,
-  autoCreatedAt: false,
-  autoUpdatedAt: false,
+    autoPK: true,
+    autoCreatedBy: false,
+    autoCreatedAt: false,
+    autoUpdatedAt: false,
 
-  attributes: {
-    name: {
-      type: 'string',
-      notNull: true,
-      unique: true
-    },
-    identity: {
-      type: 'string',
-      notNull: true
-    },
     attributes: {
-      type: 'json'
+        name: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            unique: true
+        },
+        identity: {
+            type: Sequelize.STRING,
+            notNull: true
+        },
+        attributes: {
+            type: Sequelize.JSON
+        }
+        // permissions: {
+        //   collection: 'Permission',
+        //   via: 'model'
+        // },        
     },
-    permissions: {
-      collection: 'Permission',
-      via: 'model'
+    associate: function(){
+        Model.hasMany(Permissions, {as: 'permissions'});
+    },
+    options: {
+        tableName: 'model',
+        classMethods: {},
+        instanceMethods: {},
+        hooks: {}
     }
-  }
 };

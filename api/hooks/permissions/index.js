@@ -42,7 +42,8 @@ class Permissions extends Marlinspike {
 
     })
 
-    this.sails.after('hook:orm:loaded', () => {
+    this.sails.after('hook:sequelize:loaded', () => {
+        //TO CHANGE
       sails.models.model.count()
         .then(count => {
           if (count === _.keys(this.sails.models).length) return next()

@@ -6,15 +6,23 @@
 */
 
 module.exports = {
-  autoPK: false,
-  autoUpdatedAt: false,
-  autoCreatedAt: false,
+    autoPK: false,
+    autoUpdatedAt: false,
+    autoCreatedAt: false,
 
-  attributes: {
-    request: {
-      model: 'RequestLog',
-      primaryKey: true
+    attributes: {
+        // request: {
+        //   model: 'RequestLog',
+        //   primaryKey: true
+        // }
+    },
+    associate: function(){
+        SecurityLog.hasOne(RequestLog, {as: 'request'});
+    },
+    options: {
+        tableName: 'securitylog',
+        classMethods: {},
+        instanceMethods: {},
+        hooks: {}
     }
-  }
 };
-

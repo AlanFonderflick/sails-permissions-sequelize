@@ -10,30 +10,39 @@ module.exports = {
   autoCreatedBy: false,
   autoUpdatedAt: false,
 
-  attributes: {
-    id: {
-      type: 'string',
-      primaryKey: true
+    attributes: {
+        id: {
+          type: Sequelize.STRING,
+          primaryKey: true
+        },
+        ipAddress: {
+          type: Sequelize.STRING
+        },
+        method: {
+          type: Sequelize.STRING
+        },
+        url: {
+          type: Sequelize.STRING,
+          validate: { isUrl: true }
+        },
+        body: {
+          type: Sequelize.JSON
+        },
+        // user: {
+        //   model: 'User'
+        // },
+        model: {
+          type: Sequelize.STRING
+        }
     },
-    ipAddress: {
-      type: 'string'
+    associate: function(){
+        RequestLog.hasOne(User)
     },
-    method: {
-      type: 'string'
-    },
-    url: {
-      type: 'string',
-      url: true
-    },
-    body: {
-      type: 'json'
-    },
-    user: {
-      model: 'User'
-    },
-    model: {
-      type: 'string'
+    options: {
+        tableName: 'requestlog',
+        classMethods: {},
+        instanceMethods: {},
+        hooks: {}
     }
-  }
-};
 
+};

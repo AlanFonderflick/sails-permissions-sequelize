@@ -4,16 +4,26 @@ var _super = require('sails-auth/api/models/User');
 _.merge(exports, _super);
 _.merge(exports, {
   attributes: {
-    roles: {
-      collection: 'Role',
-      via: 'users',
-      dominant: true
-    },
-    permissions: {
-      collection: "Permission",
-      via: "user"
-    }
+    // roles: {
+    //   collection: 'Role',
+    //   via: 'users',
+    //   dominant: true
+    // },
+    // permissions: {
+    //   collection: "Permission",
+    //   via: "user"
+    // }
   },
+  associate: function(){
+      User.hasMany(Permission, {as: 'permissions'});
+      User.belongsToMany(Permission, {through: 'userroles',as: 'roles'});
+  },
+  options: {
+      tableName: 'user',
+      classMethods: {},
+      instanceMethods: {},
+      hooks: {}
+  }
 
   /**
    * Attach default Role to a new User

@@ -6,7 +6,17 @@ _.merge(exports, _super);
 _.merge(exports, {
 
   autoCreatedBy: false
+  attributes: {
 
+  },
+  associate: function(){
+  },
+  options: {
+      tableName: 'passport',
+      classMethods: {},
+      instanceMethods: {},
+      hooks: {}
+  }
   // Extend with custom logic here by adding additional fields, methods, etc.
 
   /**

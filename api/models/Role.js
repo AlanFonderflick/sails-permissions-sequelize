@@ -8,29 +8,43 @@
  * @see <http://www.postgresql.org/docs/9.3/static/sql-grant.html>
  */
 module.exports = {
-  autoCreatedBy: false,
+    autoCreatedBy: false,
 
-  description: 'Confers `Permission` to `User`',
+    description: 'Confers `Permission` to `User`',
 
-  attributes: {
-    name: {
-      type: 'string',
-      index: true,
-      notNull: true,
-      unique: true
+    attributes: {
+        name: {
+          type: Sequelize.STRING,
+          index: true,
+          notNull: true,
+          unique: true
+        },
+        // users: {
+        //   collection: 'User',
+        //   via: 'roles'
+        // },
+        active: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: true
+        },
+        // permissions: {
+        //   collection: 'Permission',
+        //   via: 'role'
+        // }
     },
-    users: {
-      collection: 'User',
-      via: 'roles'
+    associate: function(){
+        Role.belongsToMany(User, {through: 'userroles',as: 'users'});
+        Role.hasMany(Permission, {as: 'permissions'});
     },
-    active: {
-      type: 'boolean',
-      defaultsTo: true,
-      index: true
-    },
-    permissions: {
-      collection: 'Permission',
-      via: 'role'
+    indexes: [
+        {
+          fields: ['active']
+        },
+    ],
+    options: {
+        tableName: 'role',
+        classMethods: {},
+        instanceMethods: {},
+        hooks: {}
     }
-  }
 };
