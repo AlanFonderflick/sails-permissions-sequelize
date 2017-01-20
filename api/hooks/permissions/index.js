@@ -9,7 +9,7 @@ var permissionPolicies = [
 import path from 'path'
 import _ from 'lodash'
 import Marlinspike from 'marlinspike'
-import models from './dist/api/models'
+// import models from './dist/api/models'
 
 class Permissions extends Marlinspike {
   constructor (sails) {
@@ -24,56 +24,56 @@ class Permissions extends Marlinspike {
      */
     this.sails.config.blueprints.populate = false
 
-    let hook = this;
-    hook.initModels()
-    var connection, migrate, sequelize;
-    sails.log.verbose('Using connection named ' + sails.config.models.connection);
-    connection = sails.config.connections[sails.config.models.connection];
-    if (connection == null) {
-      throw new Error('Connection \'' + sails.config.models.connection + '\' not found in config/connections');
-    }
-    if (connection.options == null) {
-      connection.options = {};
-    }
-    connection.options.logging = connection.options.logging || sails.log.verbose; //A function that gets executed everytime Sequelize would log something.
-
-     migrate = sails.config.models.migrate;
-    sails.log.verbose('Migration: ' + migrate);
-
-    if (connection.url) {
-      sequelize = new Sequelize(connection.url, connection.options);
-    } else {
-      sequelize = new Sequelize(connection.database, connection.user, connection.password, connection.options);
-    }
-    global['sequelize'] = sequelize;
-
-      var modelDef, modelName, ref;
-      if (err != null) {
-        return next(err);
-      }
-      for (modelName in models) {
-        modelDef = models[modelName];
-        sails.log.verbose('Loading model \'' + modelDef.globalId + '\'');
-        global[modelDef.globalId] = global['sequelize'].define(modelDef.globalId, modelDef.attributes, modelDef.options);
-        _.extend(global[modelDef.globalId], modelDef);
-        sails.models[modelDef.globalId.toLowerCase()] = global[modelDef.globalId];
-      }
-
-      for (modelName in models) {
-        modelDef = models[modelName];
-
-        hook.setAssociation(modelDef);
-        hook.setDefaultScope(modelDef);
-      }
-
-      if(migrate === 'safe') {
-        return next();
-      } else {
-        var forceSync = migrate === 'drop';
-        global['sequelize'].sync({ force: forceSync }).then(function() {
-          return next();
-        });
-      }
+    // let hook = this;
+    // hook.initModels()
+    // var connection, migrate, sequelize;
+    // sails.log.verbose('Using connection named ' + sails.config.models.connection);
+    // connection = sails.config.connections[sails.config.models.connection];
+    // if (connection == null) {
+    //   throw new Error('Connection \'' + sails.config.models.connection + '\' not found in config/connections');
+    // }
+    // if (connection.options == null) {
+    //   connection.options = {};
+    // }
+    // connection.options.logging = connection.options.logging || sails.log.verbose; //A function that gets executed everytime Sequelize would log something.
+    //
+    //  migrate = sails.config.models.migrate;
+    // sails.log.verbose('Migration: ' + migrate);
+    //
+    // if (connection.url) {
+    //   sequelize = new Sequelize(connection.url, connection.options);
+    // } else {
+    //   sequelize = new Sequelize(connection.database, connection.user, connection.password, connection.options);
+    // }
+    // global['sequelize'] = sequelize;
+    //
+    //   var modelDef, modelName, ref;
+    //   if (err != null) {
+    //     return next(err);
+    //   }
+    //   for (modelName in models) {
+    //     modelDef = models[modelName];
+    //     sails.log.verbose('Loading model \'' + modelDef.globalId + '\'');
+    //     global[modelDef.globalId] = global['sequelize'].define(modelDef.globalId, modelDef.attributes, modelDef.options);
+    //     _.extend(global[modelDef.globalId], modelDef);
+    //     sails.models[modelDef.globalId.toLowerCase()] = global[modelDef.globalId];
+    //   }
+    //
+    //   for (modelName in models) {
+    //     modelDef = models[modelName];
+    //
+    //     hook.setAssociation(modelDef);
+    //     hook.setDefaultScope(modelDef);
+    //   }
+    //
+    //   if(migrate === 'safe') {
+    //     return next();
+    //   } else {
+    //     var forceSync = migrate === 'drop';
+    //     global['sequelize'].sync({ force: forceSync }).then(function() {
+    //       return next();
+    //     });
+    //   }
 
  }
 
