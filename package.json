@@ -1,6 +1,6 @@
 {
   "name": "sails-permissions-sequelize",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Sequelize version of : Comprehensive user permissions and entitlements system for sails.js and Waterline. Supports user authentication with passport.js, role-based permissioning, object ownership, and row-level security.",
   "main": "dist/api/hooks/permissions/index.js",
   "scripts": {

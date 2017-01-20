@@ -23,7 +23,7 @@ _.merge(exports, {
       classMethods: {},
       instanceMethods: {},
       hooks: {}
-  }
+  },
 
   /**
    * Attach default Role to a new User
