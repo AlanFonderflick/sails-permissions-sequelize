@@ -1,11 +1,15 @@
-# sails-permissions
+# sails-permissions-sequelize
 
-[![Looking for maintainers][hacktober-image]][hacktober-url]
+A fork from sails-permissions, without waterline. See the original project here : https://github.com/langateam/sails-permissions/wiki
 
-[![Gitter][gitter-image]][gitter-url]
-[![NPM version][npm-image]][npm-url]
-[![Build status][travis-image]][travis-url]
-[![Dependency Status][daviddm-image]][daviddm-url]
+## Install
+```
+npm install sails-hook-sequelize --save
+npm install sails-hook-sequelize-blueprints --save
+npm install sails-auth --save
+```
+---
+
 
 Comprehensive sails.js user permissions and entitlements system. Supports user authentication with passport.js, role-based permissioning, object ownership, and row-level security.
 
